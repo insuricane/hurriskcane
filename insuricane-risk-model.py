@@ -1,4 +1,6 @@
+
 # coding: utf-8
+
 # # Path of destruction
 # 
 # Python script to import Hurricane data and a heuristical model for estimating home damage. We use data for Hurricane Irma from last year in our case study.
@@ -11,6 +13,8 @@
 # Source: https://www.nhc.noaa.gov/gis/archive_forecast_results.php?id=al11&year=2017&name=Hurricane%20IRMA  
 # File1: al112017_5day_037.zip (8:59 AM)    
 # File2: al112017_fcst_037.zip (9:00 AM)
+
+# In[5]:
 
 
 # import packages
@@ -26,8 +30,6 @@ from shapely.geometry import shape, Point
 from geopy.distance import geodesic
 import tempfile
 import fiona
-
-
 
 class Insuricane():
     
@@ -219,3 +221,34 @@ class Insuricane():
 
         plt.legend()
         plt.show()
+
+
+# Testing for Disney World
+
+# In[6]:
+
+
+# initialize
+BCG = Insuricane('Disney', Point((-81.38144, 28.54434)))
+
+
+# In[ ]:
+
+
+# chance of hurricane
+BCG.calc_risk(suppressPrint = True)
+
+
+# In[ ]:
+
+
+# most dangerous day
+BCG.calc_max_hurricane() 
+
+
+# In[ ]:
+
+
+# plot graph
+BCG.plot_irmachance()
+
