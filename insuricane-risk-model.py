@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 import geojson
-from geojson import Point, Feature, FeatureCollection, dump
+from geojson import Feature, FeatureCollection, dump
 from shapely.geometry import shape, Point
 from geopy.distance import geodesic
 import tempfile
