@@ -4,15 +4,13 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
-      }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+
     </style>
     <title>Insuricane Maps</title>
 
@@ -24,92 +22,20 @@
     <script src="path.js"></script>
     <script src="cone.js"></script>
     <script src="radii.js"></script>
+
+    <!-- anychart -->
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
   </head>
 
   <body>
-    <div id="map"></div>
-    <script src="jsmap.js"></script>
-    <!-- <script type='text/javascript'> -->
-      var map = L.map('map', {
-        center: [24.80, -81.2],
-        zoom: 5
-      });
-
-      function onEachFeature(feature, layer) {
-        // does this feature have a property named popupContent?
-        if (feature.properties && feature.properties.popupContent) {
-            layer.bindPopup(feature.properties.popupContent);
-        }
-      }
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 15,
-          id: 'mapbox.streets',
-          accessToken: 'pk.eyJ1IjoiYW5kcmV3Y3VpIiwiYSI6ImNqazNkZWY0bjBodXQzbHRoN3QzdjQ2bGQifQ.B_6mN1CgDJrz2_mSjGGaOQ'
-      }).addTo(map);
-      L.tileLayer.provider('CartoDB.Positron').addTo(map);
-      L.tileLayer.provider('CartoDB.Voyager').addTo(map);
-
-      var geojsonMarkerOptions = {
-        radius: 2.5,
-        fillColor: "#FF5252",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      };
-
-      /** just the path **/
-      L.geoJSON(path, {
-          style: {
-              "color": "#FF5252",
-              "weight": 2,
-              "opacity": 0.8
-          },
-          pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, geojsonMarkerOptions);
-          }
-      }).addTo(map);
-
-      /** just the cone damge **/
-      L.geoJSON(cone, {
-          style: {
-              "color": "#FF5252",
-              "weight": 1,
-              "opacity": 0.75
-          }
-      }).addTo(map);
-
-      /** your house **/
-      var geojsonFeature = {
-          "type": "Feature",
-          "properties": {
-              "name": "Home",
-              "popupContent": "Chance of damage: 86%"
-          },
-          "geometry": {
-              "type": "Point",
-              "coordinates": [-81.99404, 29.75621]
-          }
-      };
-
-      var geojsonMarkerOptions2 = {
-        radius: 6,
-        fillColor: "#000000",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      };
-
-      L.geoJSON(geojsonFeature, {
-        onEachFeature: onEachFeature,
-        pointToLayer: function (feature, latlng) {
-          return L.circleMarker(latlng, geojsonMarkerOptions2);
-        }
-      }).addTo(map)
-
-    </script>
+    <div id="map" style="width: 49%; height: 100%; display: inline-block">
+      <script src="jsmap.js"></script>
+    </div>
+    <div id="container" style="width: 49%; height: 100%; display: inline-block">
+      <script src="piechart.js"></script>
+    </div>
+    <!-- <div id="map"></div> -->
+    <!-- <div id="container"></div> -->
   </body>
 </html>
